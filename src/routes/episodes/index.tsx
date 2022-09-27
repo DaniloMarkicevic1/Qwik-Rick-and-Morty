@@ -7,7 +7,6 @@ import {
 } from '@builder.io/qwik';
 
 import { DocumentHead, Link } from '@builder.io/qwik-city';
-import { CharCard } from '~/components/card/CharCard';
 
 import styles from './index.css?inline';
 
@@ -26,15 +25,10 @@ export default component$(() => {
         {
           id: 0,
           name: '',
-          status: '',
-          species: '',
-          type: '',
-          gender: '',
-          origin: { name: '', url: '' },
-          location: { name: '', url: '' },
-          image: '',
-          episode: [''],
+          air_date: '',
+          episode: '',
           url: '',
+          characters: [''],
           created: '',
         },
       ],
@@ -42,12 +36,10 @@ export default component$(() => {
   });
 
   useMount$(async () => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character`);
+    const response = await fetch(`https://rickandmortyapi.com/api/episode`);
     store.data = await response.json();
   });
-
-  if (store.data?.results?.length === 0) return null;
-
+  if (store.data.results.length === 0) return null;
   return (
     <>
       <Link
@@ -62,8 +54,17 @@ export default component$(() => {
         {'<'} Go Back
       </Link>
       <div className="cards">
-        {store.data?.results?.map((char) => {
-          return <CharCard char={char} />;
+        {store.data.results.map((episode) => {
+          return (
+            <Link href={mutable(`/episode/${episode.id}`)}>
+              <div className="card-inner">
+                <p>Episode: {episode.id}</p>
+                <p>Name: {episode.name}</p>
+                <p>Air Date: {episode.air_date}</p>
+                <p>Characters Appearing: {episode.characters.length}</p>
+              </div>
+            </Link>
+          );
         })}
       </div>
     </>

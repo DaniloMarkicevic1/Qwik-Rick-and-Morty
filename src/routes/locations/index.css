@@ -1,11 +1,22 @@
+.card-inner {
+  background: #f2f2f2;
+  border-radius: 8px;
+  padding: 6px 4px 0px;
+  height: 100%;
+}
+
+.card-inner:hover {
+  background: #333;
+  color: white;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 16px;
-  justify-items: center;
-  margin: 0 auto;
-  padding: 12px;
+  margin-top: 12px;
 }
+
 @media screen and (min-width: 500px) {
   .cards {
     grid-template-columns: repeat(2, 1fr);

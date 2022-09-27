@@ -6,16 +6,14 @@
  *
  */
 
-:root {
-    --qwik-dark-blue: #006ce9;
-    --qwik-light-blue: #18b6f6;
-    --qwik-light-purple: #ac7ff4;
-    --qwik-dark-purple: #713fc2;
+body {
+  background-color: #fafafa;
+  font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  padding: 20px 20px 40px 20px;
 }
 
-body {
-    background-color: #fafafa;
-    font-family: "Poppins", ui-sans-serif, system-ui, -apple-system,
-        BlinkMacSystemFont, sans-serif;
-    padding: 20px 20px 40px 20px;
+a {
+  text-decoration: none;
+  color: unset;
 }

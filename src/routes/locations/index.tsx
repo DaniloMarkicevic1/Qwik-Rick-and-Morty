@@ -7,7 +7,6 @@ import {
 } from '@builder.io/qwik';
 
 import { DocumentHead, Link } from '@builder.io/qwik-city';
-import { CharCard } from '~/components/card/CharCard';
 
 import styles from './index.css?inline';
 
@@ -24,16 +23,11 @@ export default component$(() => {
       },
       results: [
         {
-          id: 0,
+          id: '',
           name: '',
-          status: '',
-          species: '',
           type: '',
-          gender: '',
-          origin: { name: '', url: '' },
-          location: { name: '', url: '' },
-          image: '',
-          episode: [''],
+          dimension: '',
+          residents: [''],
           url: '',
           created: '',
         },
@@ -42,12 +36,10 @@ export default component$(() => {
   });
 
   useMount$(async () => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character`);
+    const response = await fetch(`https://rickandmortyapi.com/api/location`);
     store.data = await response.json();
   });
-
-  if (store.data?.results?.length === 0) return null;
-
+  if (store.data.results.length === 0) return null;
   return (
     <>
       <Link
@@ -62,8 +54,18 @@ export default component$(() => {
         {'<'} Go Back
       </Link>
       <div className="cards">
-        {store.data?.results?.map((char) => {
-          return <CharCard char={char} />;
+        {store.data.results.map((location) => {
+          return (
+            <Link href={mutable(`/location/${location.id}`)}>
+              <div className="card-inner">
+                <p>Episode: {location.id}</p>
+                <p>Name: {location.name}</p>
+                <p>Type: {location.type}</p>
+                <p>Dimension: {location.dimension}</p>
+                <p>No. Of Residents: {location.residents.length}</p>
+              </div>
+            </Link>
+          );
         })}
       </div>
     </>
